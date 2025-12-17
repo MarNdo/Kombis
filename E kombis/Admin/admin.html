@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geniëlle — Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="../User/main.js" defer></script>
+    <script src="admin.js" defer></script>
+  </head>
+  <body>
+    <!-- Navbar (reuse site nav) -->
+    <main class="container" style="padding: 24px 18px">
+      <div class="admin-layout">
+        <aside class="admin-sidebar">
+          <div class="sidebar-header">
+            <div style="display: flex; gap: 10px; align-items: center">
+              <div class="admin-avatar">G</div>
+              <div>
+                <div class="admin-brand">Geniëlle Admin</div>
+                <div class="admin-user-info">
+                  <div id="admin-user-name" style="font-weight: 600">Admin</div>
+                  <div
+                    id="admin-user-email"
+                    style="font-size: 12px; color: #666"
+                  >
+                    admin@example.com
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center">
+              <button
+                id="toggle-sidebar"
+                class="sidebar-toggle"
+                aria-label="Toggle sidebar"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <button
+                id="admin-logout-btn"
+                class="btn btn-secondary"
+                title="Logout"
+              >
+                Keluar
+              </button>
+            </div>
+          </div>
+          <nav class="sidebar-nav">
+            <button class="btn nav-item active" data-tab="users">
+              Pengguna
+            </button>
+            <button class="btn nav-item" data-tab="products">Produk</button>
+            <button class="btn nav-item" data-tab="orders">Pesanan</button>
+          </nav>
+          <div class="sidebar-stats">
+            <div class="stat">
+              <div class="stat-value" id="stat-users">0</div>
+              <div class="stat-label">Pengguna</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="stat-products">0</div>
+              <div class="stat-label">Produk</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="stat-orders">0</div>
+              <div class="stat-label">Pesanan</div>
+            </div>
+          </div>
+        </aside>
+
+        <section class="admin-main">
+          <header class="admin-header">
+            <div>
+              <h1>Dashboard Admin</h1>
+              <p class="muted">Kelola pengguna, produk, dan pesanan.</p>
+            </div>
+            <div class="header-actions">
+              <input
+                id="admin-search"
+                class="search-input"
+                placeholder="Cari pengguna atau produk..."
+              />
+              <button
+                id="add-product-top"
+                class="btn btn-primary"
+                style="margin-left: 8px"
+              >
+                Tambah Produk
+              </button>
+            </div>
+          </header>
+
+          <div id="admin-dashboard-content" class="admin-content">
+            <div class="cards-row">
+              <div class="card mini">
+                <div class="card-title">Total Pengguna</div>
+                <div class="card-value" id="card-users">0</div>
+              </div>
+              <div class="card mini">
+                <div class="card-title">Total Produk</div>
+                <div class="card-value" id="card-products">0</div>
+              </div>
+              <div class="card mini">
+                <div class="card-title">Pesanan</div>
+                <div class="card-value" id="card-orders">0</div>
+              </div>
+            </div>
+
+            <div class="list-area">
+              <div id="users-list">
+                <p>Memuat daftar pengguna...</p>
+              </div>
+              <div id="products-list" style="display: none">
+                <p>Memuat daftar produk...</p>
+              </div>
+              <div id="orders-list" style="display: none">
+                <p>Memuat daftar pesanan...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Product Editor Modal -->
+    <div id="product-modal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" id="product-modal-close">&times;</button>
+        <h2 id="product-modal-title">Tambah Produk</h2>
+        <form id="product-form">
+          <div style="display: flex; gap: 8px; flex-direction: column">
+            <input id="product-id" type="hidden" />
+            <label>Nama Produk<input id="product-name" required /></label>
+            <label
+              >Harga (angka)<input id="product-price" type="number" required
+            /></label>
+            <label>Kategori<input id="product-category" /></label>
+            <label>URL Gambar<input id="product-image" /></label>
+            <label
+              >Stok<input id="product-stock" type="number" value="1" min="0"
+            /></label>
+            <label>Deskripsi<textarea id="product-desc"></textarea></label>
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                justify-content: flex-end;
+                margin-top: 8px;
+              "
+            >
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="product-cancel"
+              >
+                Batal
+              </button>
+              <button type="submit" class="btn btn-primary" id="product-save">
+                Simpan
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <button class="modal-close" id="confirm-modal-close">&times;</button>
+        <h3 id="confirm-title">Konfirmasi</h3>
+        <p id="confirm-message">Anda yakin?</p>
+        <div
+          style="
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 12px;
+          "
+        >
+          <button id="confirm-cancel" class="btn btn-secondary">Batal</button>
+          <button id="confirm-ok" class="btn btn-primary">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <footer
+      style="margin-top: 40px; padding: 24px; text-align: center; color: #666"
+    >
+      &copy; geniëlle.moi
+    </footer>
+  </body>
+</html>

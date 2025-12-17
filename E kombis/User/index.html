@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>geniëlle.moi | Modern Luxury Fashion</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Inter:wght@300;400;500&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="#" class="brand" aria-label="Geniëlle home">
+          <div class="logo-mark" aria-hidden="true">G</div>
+          <div>
+            <div
+              style="
+                font-weight: 700;
+                color: var(--navy-dark);
+                font-family: Poppins, Inter;
+              "
+            >
+              geniëlle.moi
+            </div>
+            <div style="font-size: 12px; color: var(--muted)">
+              Luxury that defines you
+            </div>
+          </div>
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Collections</a></li>
+          <li><a href="#about">Bestsellers</a></li>
+          <li><a href="#journal">Journal</a></li>
+          <li><a href="#brand-story">About</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+
+        <div class="nav-icons">
+          <a href="#"><i class="fas fa-search"></i></a>
+          <a href="#" id="account-icon"><i class="fas fa-user"></i></a>
+          <a href="#" id="cart-icon">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Akun Sidebar -->
+    <div class="account-sidebar" id="account-sidebar">
+      <div class="account-header">
+        <h3>Akun Saya</h3>
+        <button class="account-close" id="account-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="account-content" id="account-content">
+        <!-- Guest: Sign in / Register -->
+        <div class="account-guest" id="account-guest">
+          <div class="guest-actions">
+            <button class="btn btn-primary" id="show-login">Masuk</button>
+            <button class="btn btn-secondary" id="show-register">Daftar</button>
+          </div>
+
+          <form
+            id="login-form"
+            class="account-form"
+            style="display: none; margin-top: 16px"
+          >
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" id="login-email" required />
+            </div>
+            <div class="form-group">
+              <label for="login-password">Kata Sandi</label>
+              <input type="password" id="login-password" />
+            </div>
+            <button type="submit" class="btn btn-primary">Masuk</button>
+          </form>
+
+          <form
+            id="register-form"
+            class="account-form"
+            style="display: none; margin-top: 16px"
+          >
+            <div class="form-group">
+              <label for="register-name">Nama</label>
+              <input type="text" id="register-name" required />
+            </div>
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" required />
+            </div>
+            <div class="form-group">
+              <label for="register-password">Kata Sandi</label>
+              <input type="password" id="register-password" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Daftar</button>
+          </form>
+        </div>
+
+        <!-- Logged-in user info -->
+        <div class="account-user" id="account-user" style="display: none">
+          <div class="user-card">
+            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+            <div class="user-info">
+              <div class="user-name" id="user-name">Pengguna</div>
+              <div class="user-role" id="user-role">Peran: pengguna</div>
+            </div>
+          </div>
+
+          <ul class="account-links">
+            <li><a href="#profile" id="profile-link">Profil</a></li>
+            <li><a href="#orders" id="orders-link">Pesanan</a></li>
+            <li id="admin-section" style="display: none">
+              <a
+                href="Admin/admin.html"
+                class="btn btn-primary"
+                id="open-admin-dashboard"
+              >
+                Buka Dashboard Admin
+              </a>
+            </li>
+            <li id="users-section" style="display: none">
+              <a href="#users" id="users-link">Pengguna</a>
+            </li>
+          </ul>
+
+          <div style="margin-top: 20px">
+            <button class="btn btn-secondary" id="logout-btn">Keluar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin page is available at Admin/admin.html -->
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h3>Keranjang Belanja</h3>
+        <button class="cart-close" id="cart-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items">
+        <!-- Cart items will be added here dynamically -->
+        <div class="cart-empty">
+          <i class="fas fa-shopping-bag"></i>
+          <p>Keranjang belanja Anda masih kosong</p>
+        </div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cart-total">Rp 0</span>
+        </div>
+        <button
+          class="btn btn-primary btn-block"
+          id="checkout-btn"
+          style="width: 100%; margin-bottom: 10px"
+        >
+          Lanjut ke Pembayaran
+        </button>
+        <button
+          class="btn btn-secondary btn-block"
+          id="continue-shopping"
+          style="width: 100%"
+        >
+          Lanjut Berbelanja
+        </button>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="checkout-close">
+          <i class="fas fa-times"></i>
+        </button>
+        <h3 class="modal-title">Data Pemesanan</h3>
+        <form id="checkout-form">
+          <div class="form-group">
+            <label for="customer-name">Nama Lengkap *</label>
+            <input type="text" id="customer-name" required />
+          </div>
+          <div class="form-group">
+            <label for="customer-email">Email *</label>
+            <input type="email" id="customer-email" required />
+          </div>
+          <div class="form-group">
+            <label for="customer-phone">Nomor WhatsApp *</label>
+            <input type="tel" id="customer-phone" required />
+          </div>
+          <div class="form-group">
+            <label for="customer-address">Alamat *</label>
+            <input type="text" id="customer-address" required />
+          </div>
+          <div class="form-group">
+            <label>Ukuran</label>
+            <div style="display: flex; gap: 15px; margin-top: 10px">
+              <label style="display: flex; align-items: center; gap: 5px">
+                <input
+                  type="radio"
+                  name="pickup-method"
+                  value="dine-in"
+                  checked
+                />
+                M
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px">
+                <input type="radio" name="pickup-method" value="takeaway" /> L
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px">
+                <input type="radio" name="pickup-method" value="delivery" /> XL
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-success btn-block"
+              style="width: 100%"
+            >
+              <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+            </button>
+          </div>
+          <p style="font-size: 0.85rem; color: #666; margin-top: 15px">
+            * Pesanan akan dikirim ke WhatsApp kami untuk diproses. Silakan
+            tunggu konfirmasi dari kami.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container hero-container">
+        <div class="hero-content fade-in">
+          <h1>ELEVATED ESSENTIALS, REDEFINED.</h1>
+          <p>
+            Temukan koleksi pilihan di mana desain abadi bertemu dengan
+            kerajinan tangan yang sempurna. Untuk individu modern yang
+            menghargai substansi daripada spektakel.
+          </p>
+          <!--<div class="hero-buttons">
+                    <a href="#menu" class="btn btn-primary">LIHAT KOLEKSI</a>
+                </div>-->
+        </div>
+        <div class="hero-image fade-in"></div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>PRODUK KAMI</h2>
+          <p>
+            Pilih dari koleksi eksklusif kami yang dibuat dengan bahan terbaik
+            dan kerajinan tangan terampil.
+          </p>
+        </div>
+
+        <!--<div class="menu-categories">
+                <button class="category-btn active" data-category="all">Semua</button>
+                <button class="category-btn" data-category="makanan">Gaun</button>
+                <button class="category-btn" data-category="minuman">Sweater</button>
+                <button class="category-btn" data-category="dessert">Celana</button>
+            </div>-->
+
+        <div class="menu-grid" id="menu-items">
+          <!-- Menu items will be loaded here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>PRODUK TERLARIS</h2>
+          <p>
+            Desain paling dicintai kami, disukai karena kesesuaian dan
+            bentuknya.
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card fade-in">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80"
+                alt="Classic Blazer"
+                class="front"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Classic Blazer Back"
+                class="back"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Blazer Milano</h3>
+              <p class="product-price">Rp 4.250.000</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                alt="Silk Dress"
+                class="front"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                alt="Silk Dress Back"
+                class="back"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Gaun Silk Slip</h3>
+              <p class="product-price">Rp 3.650.000</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=746&q=80"
+                alt="Cashmere Sweater"
+                class="front"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1574180045827-681f8a1a9622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Cashmere Sweater Back"
+                class="back"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Sweater Cashmere</h3>
+              <p class="product-price">Rp 2.950.000</p>
+            </div>
+          </div>
+
+          <div class="product-card fade-in">
+            <div class="product-image">
+              <img
+                src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Tailored Trousers"
+                class="front"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                alt="Tailored Trousers Back"
+                class="back"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Celana Tailored</h3>
+              <p class="product-price">Rp 2.450.000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section id="brand-story">
+      <div class="container story-container">
+        <div class="story-image fade-in"></div>
+        <div class="story-content fade-in">
+          <p>
+            Di geniëlle.moi, kemewahan didefinisikan oleh detail yang dipikirkan
+            matang. Kami mencari bahan alami terbaik dan bermitra dengan
+            pengrajin untuk membuat potongan yang tidak hanya dipakai, tetapi
+            dihargai. Filosofi kami dibangun di atas kualitas berkelanjutan,
+            dirancang untuk bertahan melampaui musim.
+          </p>
+          <p>
+            Setiap pakaian adalah bukti ketelitian dan perhatian, dari sketsa
+            awal hingga jahitan terakhir. Kami percaya dalam menciptakan lebih
+            sedikit, hal yang lebih baik — potongan yang menjadi bagian integral
+            dari cerita pribadi Anda.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journal Section -->
+    <section id="journal">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>DARI JOURNAL</h2>
+          <p>Wawasan tentang gaya, keberlanjutan, dan seni hidup yang baik.</p>
+        </div>
+
+        <div class="journal-grid">
+          <div class="journal-card fade-in">
+            <div class="journal-image">
+              <img
+                src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                alt="Capsule Wardrobe"
+              />
+            </div>
+            <div class="journal-content">
+              <h3>Seni Kapsul Wardrobe</h3>
+              <p>
+                Cara membangun lemari pakaian serbaguna dengan lebih sedikit,
+                potongan yang lebih baik yang bekerja bersama dengan mulus.
+              </p>
+            </div>
+          </div>
+
+          <div class="journal-card fade-in">
+            <div class="journal-image">
+              <img
+                src="https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                alt="Linen Fabric"
+              />
+            </div>
+            <div class="journal-content">
+              <h3>Material Spotlight: Linen Mewah</h3>
+              <p>
+                Temukan mengapa linen adalah pilihan kain kami untuk musim panas
+                dan bagaimana merawatnya dengan benar.
+              </p>
+            </div>
+          </div>
+
+          <div class="journal-card fade-in">
+            <div class="journal-image">
+              <img
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                alt="Studio Visit"
+              />
+            </div>
+            <div class="journal-content">
+              <h3>Sebuah Hari di Studio</h3>
+              <p>
+                Di balik layar dengan tim desain kami saat mereka menghidupkan
+                koleksi baru.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+      <div class="container newsletter-container">
+        <div class="section-title fade-in">
+          <h3>BERGABUNG DENGAN DUNIA geniëlle.moi</h3>
+          <p>
+            Jadilah yang pertama mengakses koleksi baru, acara eksklusif, dan
+            cerita gaya kurasi.
+          </p>
+        </div>
+
+        <form class="newsletter-form fade-in">
+          <input
+            type="email"
+            placeholder="Masukkan alamat email Anda"
+            required
+          />
+          <button type="submit" class="btn">BERLANGGANAN</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-grid">
+            <div class="footer-col">
+              <a href="#" class="footer-logo">geniëlle.moi</a>
+              <p class="footer-tagline">
+                Fashion abadi dengan sensibilitas modern. Dibuat untuk individu
+                yang bijaksana yang menghargai kualitas dan desain.
+              </p>
+            </div>
+
+            <div class="footer-col">
+              <h4>BELANJA</h4>
+              <ul class="footer-links">
+                <li><a href="#">Baru Tiba</a></li>
+                <li><a href="#">Gaun</a></li>
+                <li><a href="#">Atasan</a></li>
+                <li><a href="#">Bawahan</a></li>
+                <li><a href="#">Outerwear</a></li>
+                <li><a href="#">Aksesoris</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>TENTANG</h4>
+              <ul class="footer-links">
+                <li><a href="#">Cerita Kami</a></li>
+                <li><a href="#">Keberlanjutan</a></li>
+                <li><a href="#">Kerajinan Tangan</a></li>
+                <li><a href="#">Journal</a></li>
+                <li><a href="#">Karir</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>DUKUNGAN</h4>
+              <ul class="footer-links">
+                <li><a href="#">Hubungi Kami</a></li>
+                <li><a href="#">Pengiriman & Pengembalian</a></li>
+                <li><a href="#">Panduan Ukuran</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Kebijakan Privasi</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="copyright">
+            © 2025 geniëlle.moi Hak cipta dilindungi undang-undang.
+          </div>
+
+          <div class="footer-bottom-links">
+            <a href="#">Syarat Penggunaan</a>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+              <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
